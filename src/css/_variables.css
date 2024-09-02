@@ -19,3 +19,21 @@
     --color-btn-border-primary: var(--color-light);
     --color-btn-text-primary: var(--color-dark);
 }
+@media (prefers-color-scheme: light) {
+    [data-theme="system"] {
+        --color-bg-primary: var(--color-light);
+        --color-text-primary: var(--color-dark);
+        --color-btn-bg-primary: var(--color-dark);
+        --color-btn-border-primary: var(--color-dark);
+        --color-btn-text-primary: var(--color-light);
+    }
+}
+@media (prefers-color-scheme: dark) {
+    [data-theme="system"] {
+        --color-bg-primary: var(--color-dark);
+        --color-text-primary: var(--color-light);
+        --color-btn-bg-primary: var(--color-light);
+        --color-btn-border-primary: var(--color-light);
+        --color-btn-text-primary: var(--color-dark);
+    }
+}

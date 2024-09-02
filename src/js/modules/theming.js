@@ -2,18 +2,21 @@ export class Theming {
     #html;
     #htmlRootAttribute;
     #defaultThemes;
+    #currentTheme;
     constructor(config = {}) {
         this.#html = document.documentElement;
         this.#htmlRootAttribute = 'data-theme';
         this.#defaultThemes = {
             light: 'light',
-            dark: 'dark'
+            dark: 'dark',
+            system: 'system'
         }
         this.config = {
             ...config,
             storageKey: 'color_theme',
             detectSystemTheme: true
         }
+        this.#currentTheme = this.#defaultThemes.light;
 
         this.#init();
     }
@@ -23,40 +26,30 @@ export class Theming {
     }
 
     get currentTheme() {
-        return localStorage.getItem(this.config.storageKey) ?? this.#defaultThemes.light
+        return this.#currentTheme;
+    }
+
+    get localStorageTheme() {
+        return localStorage.getItem(this.config.storageKey);
     }
 
     #setInitialTheme() {
-        if (!this.config.detectSystemTheme) {
-            this.setTheme(this.currentTheme);
-        } else {
-            this.detectSystemTheme();
+        if (this.config.detectSystemTheme && !this.localStorageTheme) {
+            this.setSystemTheme();
+            return;
         }
-    }
 
-    detectSystemTheme() {
-        this.setSystemTheme();
-
-        if(window.matchMedia){
-            const colorSchemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-            colorSchemeQuery.addEventListener('change', (e) => {
-                const theme = e.matches ? 'dark' : 'light';
-                this.setTheme(theme)
-            });
-        }
-    }
-
-    setSystemTheme() {
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches){
-            this.setDarkTheme();
-        } else {
-            this.setLightTheme();
-        }
+        this.setTheme(this.localStorageTheme);
     }
 
     setTheme(theme) {
+        this.#currentTheme = theme;
         localStorage.setItem(this.config.storageKey, theme);
         this.#html.setAttribute(this.#htmlRootAttribute, theme)
+    }
+
+    setSystemTheme() {
+        this.setTheme(this.#defaultThemes.system)
     }
 
     setLightTheme() {

@@ -30,6 +30,9 @@
     flex-wrap: wrap;
     gap: 20px;
 }
+.hero__actions-title {
+    flex-basis: 100%;
+}
 @media (min-width: 992px) {
     .hero {
         --columns: 2;
