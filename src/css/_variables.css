@@ -2,9 +2,20 @@
     --container-width: 1200px;
     --container-padding: 20px;
 
-    --color-bg-primary: #FFF;
-    --color-text-primary: #333;
-    --color-btn-bg-primary: #333;
-    --color-btn-border-primary: #333;
-    --color-btn-text-primary: #FFF;
+    --color-dark: #333;
+    --color-light: #FFF;
+
+    --color-bg-primary: var(--color-light);
+    --color-text-primary: var(--color-dark);
+    --color-btn-bg-primary: var(--color-dark);
+    --color-btn-border-primary: var(--color-dark);
+    --color-btn-text-primary: var(--color-light);
+}
+
+[data-theme="dark"] {
+    --color-bg-primary: var(--color-dark);
+    --color-text-primary: var(--color-light);
+    --color-btn-bg-primary: var(--color-light);
+    --color-btn-border-primary: var(--color-light);
+    --color-btn-text-primary: var(--color-dark);
 }
