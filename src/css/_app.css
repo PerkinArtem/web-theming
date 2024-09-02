@@ -1,8 +1,37 @@
-body {
-    font-family: "Noto Sans", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    font-variation-settings:
-        "wdth" 100;
+
+.hero {
+    --columns: 1;
+    --gap: 40px;
+}
+.hero__row {
+    display: grid;
+    grid-template-columns: repeat(var(--columns), 1fr);
+    align-items: center;
+    gap: var(--gap);
+}
+.hero__container {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.hero__title {
+    margin-bottom: 20px;
+    font-size: clamp(2rem, 8vw, 4rem);
+}
+.hero__text {
+    max-width: 490px;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+}
+.hero__actions {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+@media (min-width: 992px) {
+    .hero {
+        --columns: 2;
+    }
 }
