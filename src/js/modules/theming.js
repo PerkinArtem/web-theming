@@ -2,6 +2,7 @@ export class Theming {
     #html;
     #htmlRootAttribute;
     #defaultThemes;
+    #defaultTheme;
     #currentTheme;
     constructor(config = {}) {
         this.#html = document.documentElement;
@@ -12,10 +13,11 @@ export class Theming {
             system: 'system'
         }
         this.config = {
-            ...config,
             storageKey: 'color_theme',
-            detectSystemTheme: true
+            detectSystemTheme: true,
+            ...config
         }
+        this.#defaultTheme = this.#defaultThemes.light;
         this.#currentTheme = this.#defaultThemes.light;
 
         this.#init();
@@ -39,7 +41,7 @@ export class Theming {
             return;
         }
 
-        this.setTheme(this.localStorageTheme);
+        this.setTheme(this.localStorageTheme ?? this.#defaultTheme);
     }
 
     setTheme(theme) {
